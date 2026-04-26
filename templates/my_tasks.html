@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Tasks</h2>
+<p class="section-subtext">View and update the tasks assigned to you.</p>
+
+{% for task in tasks %}
+<div class="card">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+
+    <div style="margin-bottom: 12px;">
+        <p><strong>Project:</strong> {{ task.project.project_name }}</p>
+        <p>
+            <strong>Status:</strong>
+            {% if task.status == 'PENDING' %}
+                <span class="badge badge-pending">Pending</span>
+            {% elif task.status == 'IN_PROGRESS' %}
+                <span class="badge badge-in-progress">In Progress</span>
+            {% elif task.status == 'COMPLETED' %}
+                <span class="badge badge-completed">Completed</span>
+            {% elif task.status == 'OVERDUE' %}
+                <span class="badge badge-overdue">Overdue</span>
+            {% endif %}
+        </p>
+        <p>
+            <strong>Priority:</strong>
+            {% if task.priority == 'HIGH' %}
+                <span class="badge badge-high">High</span>
+            {% elif task.priority == 'MEDIUM' %}
+                <span class="badge badge-medium">Medium</span>
+            {% elif task.priority == 'LOW' %}
+                <span class="badge badge-low">Low</span>
+            {% endif %}
+        </p>
+        <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+    </div>
+
+    <form method="post" action="{% url 'update_task_status' task.pk %}">
+        {% csrf_token %}
+
+        <label><strong>Status</strong></label>
+        <select name="status">
+            <option value="PENDING">Pending</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="COMPLETED">Completed</option>
+            <option value="OVERDUE">Overdue</option>
+        </select>
+
+        <label><strong>Progress Note</strong></label>
+        <input type="text" name="progress_note" placeholder="Enter a short progress note">
+
+        <label><strong>Comment</strong></label>
+        <textarea name="comment" placeholder="Add an update comment"></textarea>
+
+        <button class="btn" type="submit">Update Task</button>
+    </form>
+</div>
+{% empty %}
+<p>No assigned tasks.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<p class="section-subtext">Welcome to CropOnTop. Here is an overview of your farm operations.</p>
+<p><strong>Your role:</strong> {{ role }}</p>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <h3>Total Projects</h3>
+        <p>{{ project_count }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Total Tasks</h3>
+        <p>{{ task_count }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Total Fields</h3>
+        <p>{{ field_count }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>My Tasks</h3>
+        <p>{{ my_tasks_count }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Completed Tasks</h3>
+        <p>{{ completed_tasks }}</p>
+    </div>
+</div>
+
+<div class="action-row" style="margin-top: 24px;">
+    <a class="btn" href="{% url 'project_list' %}">View Projects</a>
+    <a class="btn btn-secondary" href="{% url 'field_list' %}">View Fields</a>
+    <a class="btn btn-secondary" href="{% url 'my_tasks' %}">My Tasks</a>
+</div>
+{% endblock %}

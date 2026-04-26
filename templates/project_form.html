@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if edit_mode %}
+    <h2>Edit Project</h2>
+    <p class="section-subtext">Update this agricultural project.</p>
+{% else %}
+    <h2>Create Project</h2>
+    <p class="section-subtext">Add a new agricultural project to the system.</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">
+        {% if edit_mode %}Update Project{% else %}Save Project{% endif %}
+    </button>
+</form>
+{% endblock %}

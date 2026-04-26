@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block hero %}
+<div class="hero">
+    <h1>Farm productivity, all in one place.</h1>
+    <p>
+        CropOnTop helps agricultural teams manage projects, assign field tasks,
+        monitor progress, and keep farm operations organised from start to finish.
+    </p>
+
+    <div class="action-row">
+        {% if user.is_authenticated %}
+            <a class="btn" href="{% url 'dashboard' %}">Go to Dashboard</a>
+            <a class="btn btn-secondary" href="{% url 'project_list' %}">View Projects</a>
+        {% else %}
+            <a class="btn" href="{% url 'register' %}">Create Account</a>
+            <a class="btn btn-secondary" href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2>Why CropOnTop?</h2>
+<p class="section-subtext">A simple system for managing agricultural work professionally.</p>
+
+<div class="stats-grid">
+    <div class="stat-box">
+        <h3>Project Planning</h3>
+        <p style="font-size:18px;">Create and manage farm projects clearly.</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Task Assignment</h3>
+        <p style="font-size:18px;">Assign work to team members quickly.</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Progress Tracking</h3>
+        <p style="font-size:18px;">Monitor completed and pending tasks easily.</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Field Management</h3>
+        <p style="font-size:18px;">Organise crop areas and field records.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Fields</h2>
+<p class="section-subtext">Manage farm fields and crop areas.</p>
+
+<div class="action-row">
+    <a class="btn" href="{% url 'create_field' %}">Add Field</a>
+</div>
+
+<table>
+    <tr>
+        <th>Field Name</th>
+        <th>Farm</th>
+        <th>Crop Type</th>
+        <th>Area Size</th>
+        <th>Actions</th>
+    </tr>
+    {% for field in fields %}
+    <tr>
+        <td>{{ field.field_name }}</td>
+        <td>{{ field.farm.farm_name }}</td>
+        <td>{{ field.crop_type }}</td>
+        <td>{{ field.area_size }}</td>
+        <td>
+            <a class="btn btn-secondary" href="{% url 'edit_field' field.pk %}">Edit</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No fields found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

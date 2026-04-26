@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if edit_mode %}
+    <h2>Edit Task</h2>
+    <p class="section-subtext">Update this task and its assignment details.</p>
+{% else %}
+    <h2>Create Task</h2>
+    <p class="section-subtext">Create and assign a task to a worker.</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">
+        {% if edit_mode %}Update Task{% else %}Save Task{% endif %}
+    </button>
+</form>
+{% endblock %}

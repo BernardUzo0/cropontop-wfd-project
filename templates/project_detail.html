@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ project.project_name }}</h2>
+<p class="section-subtext">{{ project.description }}</p>
+
+<div class="stats-grid" style="margin-bottom: 24px;">
+    <div class="stat-box">
+        <h3>Status</h3>
+        <p style="font-size:18px;">
+            {% if project.status == 'PLANNED' %}
+                <span class="badge badge-planned">Planned</span>
+            {% elif project.status == 'ACTIVE' %}
+                <span class="badge badge-active">Active</span>
+            {% elif project.status == 'COMPLETED' %}
+                <span class="badge badge-completed">Completed</span>
+            {% elif project.status == 'DELAYED' %}
+                <span class="badge badge-delayed">Delayed</span>
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Completion</h3>
+        <p>{{ project.completion_percentage }}%</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Farm</h3>
+        <p style="font-size:18px;">{{ project.farm.farm_name }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h3>Field</h3>
+        <p style="font-size:18px;">{{ project.field.field_name }}</p>
+    </div>
+</div>
+
+<div class="action-row">
+    <a class="btn" href="{% url 'create_task' %}">Add Task</a>
+    <a class="btn btn-secondary" href="{% url 'edit_project' project.pk %}">Edit Project</a>
+    <a class="btn btn-secondary" href="{% url 'project_list' %}">Back to Projects</a>
+</div>
+
+<h3 style="margin-top: 30px;">Project Tasks</h3>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Assigned To</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.assigned_to.username }}</td>
+        <td>
+            {% if task.status == 'PENDING' %}
+                <span class="badge badge-pending">Pending</span>
+            {% elif task.status == 'IN_PROGRESS' %}
+                <span class="badge badge-in-progress">In Progress</span>
+            {% elif task.status == 'COMPLETED' %}
+                <span class="badge badge-completed">Completed</span>
+            {% elif task.status == 'OVERDUE' %}
+                <span class="badge badge-overdue">Overdue</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if task.priority == 'HIGH' %}
+                <span class="badge badge-high">High</span>
+            {% elif task.priority == 'MEDIUM' %}
+                <span class="badge badge-medium">Medium</span>
+            {% elif task.priority == 'LOW' %}
+                <span class="badge badge-low">Low</span>
+            {% endif %}
+        </td>
+        <td>{{ task.due_date }}</td>
+        <td>
+            <a class="btn btn-secondary" href="{% url 'edit_task' task.pk %}">Edit</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="6">No tasks added yet.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3 style="margin-top: 34px;">Task Update History</h3>
+{% for update in updates %}
+<div class="card">
+    <p><strong>Task:</strong> {{ update.task.title }}</p>
+    <p><strong>Updated by:</strong> {{ update.updated_by.username }}</p>
+    <p><strong>Progress note:</strong> {{ update.progress_note }}</p>
+    <p><strong>Comment:</strong> {{ update.comment }}</p>
+    <p><strong>Time:</strong> {{ update.update_time }}</p>
+</div>
+{% empty %}
+<p>No task updates recorded yet.</p>
+{% endfor %}
+{% endblock %}

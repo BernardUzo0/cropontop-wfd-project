@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<p class="section-subtext">Sign in to access your farm dashboard.</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Login</button>
+</form>
+{% endblock %}

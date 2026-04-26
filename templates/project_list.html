@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Projects</h2>
+<p class="section-subtext">Manage agricultural projects and monitor completion progress.</p>
+
+<div class="action-row">
+    <a class="btn" href="{% url 'create_project' %}">Create Project</a>
+</div>
+
+{% for project in projects %}
+<div class="card">
+    <h3>
+        <a href="{% url 'project_detail' project.pk %}" style="text-decoration:none; color:#163a24;">
+            {{ project.project_name }}
+        </a>
+    </h3>
+
+    <p>{{ project.description }}</p>
+
+    <p>
+        <strong>Status:</strong>
+        {% if project.status == 'PLANNED' %}
+            <span class="badge badge-planned">Planned</span>
+        {% elif project.status == 'ACTIVE' %}
+            <span class="badge badge-active">Active</span>
+        {% elif project.status == 'COMPLETED' %}
+            <span class="badge badge-completed">Completed</span>
+        {% elif project.status == 'DELAYED' %}
+            <span class="badge badge-delayed">Delayed</span>
+        {% endif %}
+    </p>
+
+    <p><strong>Completion:</strong> {{ project.completion_percentage }}%</p>
+
+    <div class="action-row">
+        <a class="btn btn-secondary" href="{% url 'project_detail' project.pk %}">View Project</a>
+        <a class="btn btn-secondary" href="{% url 'edit_project' project.pk %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'delete_project' project.pk %}">Delete</a>
+    </div>
+</div>
+{% empty %}
+<p>No projects found.</p>
+{% endfor %}
+{% endblock %}
