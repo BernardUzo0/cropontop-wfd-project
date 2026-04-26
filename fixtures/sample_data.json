@@ -5,6 +5,24 @@
     "fields": {
       "password": "pbkdf2_sha256$1200000$nFXJNr9wycKqhZ7MMaHjcp$aRDRi7MIAPbk0l3VyIjZrw+pW1WOkRZCirNKQ+heAoE=",
       "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@admin.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-04-23T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$nFXJNr9wycKqhZ7MMaHjcp$aRDRi7MIAPbk0l3VyIjZrw+pW1WOkRZCirNKQ+heAoE=",
+      "last_login": null,
       "is_superuser": false,
       "username": "owner1",
       "first_name": "",
@@ -19,7 +37,7 @@
   },
   {
     "model": "auth.user",
-    "pk": 2,
+    "pk": 3,
     "fields": {
       "password": "pbkdf2_sha256$1200000$nFXJNr9wycKqhZ7MMaHjcp$aRDRi7MIAPbk0l3VyIjZrw+pW1WOkRZCirNKQ+heAoE=",
       "last_login": null,
@@ -37,7 +55,7 @@
   },
   {
     "model": "auth.user",
-    "pk": 3,
+    "pk": 4,
     "fields": {
       "password": "pbkdf2_sha256$1200000$nFXJNr9wycKqhZ7MMaHjcp$aRDRi7MIAPbk0l3VyIjZrw+pW1WOkRZCirNKQ+heAoE=",
       "last_login": null,
@@ -55,7 +73,7 @@
   },
   {
     "model": "auth.user",
-    "pk": 4,
+    "pk": 5,
     "fields": {
       "password": "pbkdf2_sha256$1200000$nFXJNr9wycKqhZ7MMaHjcp$aRDRi7MIAPbk0l3VyIjZrw+pW1WOkRZCirNKQ+heAoE=",
       "last_login": null,
@@ -75,7 +93,7 @@
     "model": "core.userprofile",
     "pk": 1,
     "fields": {
-      "user": 1,
+      "user": 2,
       "role": "OWNER",
       "full_name": "Owner One"
     }
@@ -84,7 +102,7 @@
     "model": "core.userprofile",
     "pk": 2,
     "fields": {
-      "user": 2,
+      "user": 3,
       "role": "MANAGER",
       "full_name": "Manager One"
     }
@@ -93,7 +111,7 @@
     "model": "core.userprofile",
     "pk": 3,
     "fields": {
-      "user": 3,
+      "user": 4,
       "role": "WORKER",
       "full_name": "Worker One"
     }
@@ -102,7 +120,7 @@
     "model": "core.userprofile",
     "pk": 4,
     "fields": {
-      "user": 4,
+      "user": 5,
       "role": "WORKER",
       "full_name": "Worker Two"
     }
@@ -114,7 +132,7 @@
       "farm_name": "Green Valley Farm",
       "location": "Dublin",
       "size_acres": "50.00",
-      "owner": 1
+      "owner": 2
     }
   },
   {
@@ -148,7 +166,7 @@
       "status": "ACTIVE",
       "farm": 1,
       "field": 1,
-      "created_by": 2
+      "created_by": 3
     }
   },
   {
@@ -161,8 +179,22 @@
       "priority": "HIGH",
       "status": "COMPLETED",
       "project": 1,
-      "assigned_to": 3,
-      "created_by": 2
+      "assigned_to": 4,
+      "created_by": 3
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 2,
+    "fields": {
+      "title": "Seed North Field",
+      "description": "Plant seeds in the north field.",
+      "due_date": "2026-04-26",
+      "priority": "HIGH",
+      "status": "PENDING",
+      "project": 1,
+      "assigned_to": 5,
+      "created_by": 3
     }
   },
   {
@@ -170,7 +202,7 @@
     "pk": 1,
     "fields": {
       "task": 1,
-      "updated_by": 3,
+      "updated_by": 4,
       "comment": "Completed successfully.",
       "progress_note": "Finished task",
       "update_time": "2026-04-23T12:00:00Z"
